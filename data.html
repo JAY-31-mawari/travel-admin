@@ -27,7 +27,6 @@
 <body>
     <div class="container">
         <h1>TRAVEL DETAILS JSON DATA</h1>
-        <p id=p1></p>
         <table id="table-body">
             <thead>
                 <tr>
@@ -52,8 +51,25 @@
         .then((response)=>{
             return response.json();
         }).then((data)=>{
-            document.querySelector("#p1").appendChild(document.createTextNode(data))
+            rendertable(data);
         })
+
+        function rendertable(data){
+            let tablebody=document.querySelector("#table-body tbody");
+            data.forEach(({id,destname,location,desttype,price,description}) => {
+                let row=document.createElement('tr');
+                row.innerHTML=`
+                <td>${id}</td>
+                <td>${destname}</td>
+                <td>${location}</td>
+                <td>${desttype}</td>
+                <td>${price}</td>
+                <td>${description}</td>
+                <td><button class="btn btn-primary" onclick="deletedata(event)" value=${id} type="button">Delete</button></td>
+                `;
+                tablebody.appendChild(row);
+            });
+        }
 
         function deletedata(event){
             const id=[event.target.value];
