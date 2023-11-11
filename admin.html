@@ -71,13 +71,14 @@
             formdata=[...formdata,desc]
             document.querySelector('textarea').value='';
             formdata[3]=`Rs ${formdata[3]}/-`
+            let newdata={destname:formdata[0],location:formdata[1],desttype:formdata[2],price:formdata[3],description:formdata[4]}
 
             fetch("https://travelapi-qhzt.onrender.com/api/products/insertdata",{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json',
                 },
-                body:JSON.stringify(formdata),
+                body:JSON.stringify(newdata),
             })
         }
 
