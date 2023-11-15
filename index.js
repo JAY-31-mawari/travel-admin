@@ -21,6 +21,10 @@ app.get("/delete",(req,res)=>{
   res.sendFile(path.join(__dirname + '/data.html'))
 })
 
+app.get("/users",(req,res)=>{
+  res.sendFile(path.join(__dirname + '/users.html'))
+})
+
 app.listen(port, () => {
   console.log(`Server is successfully running on http://localhost:${port}`);
 })
