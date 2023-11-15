@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Payment Data</title>
+    <style>
+        .users-container{
+            width:80%;
+            margin:10px;
+        }
+        table{
+            border-collapse: collapse;
+            width:100%;
+            border:1px solid black;
+        }
+        th,td{
+            padding: 8px;
+            text-align: left;
+            border: 1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="users-container">
+        <h1>LOGIN USERS NAMES</h1>
+        <table id="table-body">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Destname</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="col-12">
+            <a href="/"><button class="btn btn-primary" type="submit">Back</button></a>
+        </div>
+    </div>
+    <script>
+        fetch("https://travelapi-qhzt.onrender.com/api/products/paymentdata")
+        .then((response)=>{
+            return response.json();
+        }).then((data)=>{
+            rendertable(data);
+        })
+
+        function rendertable(data){
+            let tablebody=document.querySelector("#table-body tbody");
+            data.forEach(({name,id,destname,location,price}) => {
+                let row=document.createElement("tr")
+                row.innerHTML=`
+                <td>${id}</td>
+                <td>${name}</td>
+                <td>${destname}</td>
+                <td>${location}</td>
+                <td>${price}</td>
+                `
+                tablebody.appendChild(row);
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
